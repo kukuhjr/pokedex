@@ -24,7 +24,7 @@ const ListDropdown = ({ options = pokemonTypes, customIcon = false, placeholder 
                 <div className="relative mt-1">
                     <Listbox.Button 
                         className="
-                            relative w-full cursor-default rounded-lg bg-white
+                            relative w-full cursor-pointer rounded-lg bg-white
                             py-2 pl-3 pr-10 text-left 
                             border-2 border-sky-700 
                             focus:outline-none
