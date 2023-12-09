@@ -16,21 +16,20 @@ const Button = ({
 }: ButtonProps) => {
     return (
         <button
-            className={cn(`flex justify-center items-center gap-2 px-4 py-3 border text-lg leading-none rounded-md`, className)}
+            className={
+                cn(`flex justify-center items-center gap-2 
+                    px-4 py-3 border text-lg 
+                    leading-none rounded-md 
+                    bg-blue-100 hover:bg-blue-200 
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-0`, 
+                    className
+                )
+            }
             onClick={onClick}
         >
             {label ?? ""}
 
             {icon}
-            
-            {/* {iconURL && (
-                <img
-                    src={iconURL}
-                    alt='arrow right icon'
-                    className='ml-2 rounded-full bg-white w-5 h-5'
-                />
-            )} */}
-
         </button>
     );
             
