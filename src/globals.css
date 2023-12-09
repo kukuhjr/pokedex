@@ -16,31 +16,53 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  text-decoration: inherit;
+@layer base {
+  a {
+    text-decoration: inherit;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span {
+    @apply p-0 m-0;
+  }
+  
+  * {
+    @apply box-border list-none p-0 m-0 scroll-smooth;
+  }
+  
+  body {
+    @apply root-background custom-scrollbar text-neutral-700;
+  }
 }
 
-a:hover {
-  color: #535bf2;
+@layer utilities {
+  .root-background {
+    @apply bg-neutral-50
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2 h-1;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-blue-200;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-sky-800 rounded-lg;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-sky-700;
+  }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span {
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 /* @media (prefers-color-scheme: light) {
   :root {
