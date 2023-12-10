@@ -5,11 +5,8 @@ import ChevronDownIcon from '../assets/icons/ChevronDownIcon'
 import CheckIcon from '../assets/icons/CheckIcon'
 
 import { POKEMON_TYPES } from '../constants/dummy'
-
-type OptionProps = {
-    name: string,
-    url: string
-}
+import { POKEMON_NATURE_IMAGE } from '../constants/colors'
+import { OptionProps } from '../types'
 
 type ListDropdownProps = {
     options?: Array<OptionProps>,
@@ -84,7 +81,7 @@ const ListDropdown = ({ options = POKEMON_TYPES, customIcon = false, placeholder
                                             {   customIcon ?
                                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
                                                         <img
-                                                            src={`/src/assets/pokemon_types/${type.name}.svg`}
+                                                            src={`/src/assets/pokemon_types/${POKEMON_NATURE_IMAGE.get(type.name)}`}
                                                             alt={`types-${idx}`}
                                                             height={20}
                                                             width={20}
