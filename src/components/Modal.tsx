@@ -49,7 +49,7 @@ const Modal = ({ title, isOpen, closeModal, modalBody }: ModalProps) => {
                                     <Button
                                         icon={<CloseIcon height='20' width='20' />}
                                         onClick={closeModal}
-                                        className='rounded-full p-2 bg-opacity-0 hover:bg-black/5 border-none focus-visible:ring-neutral-300 transition-colors'
+                                        className='icon-button-text hover:bg-black/5'
                                     />
                                 </div>
 

@@ -7,7 +7,7 @@ import TextField from "../TextField"
 import FilterIcon from "../../assets/icons/FilterIcon"
 import SearchIcon from "../../assets/icons/SearchIcon"
 import ListDropdown from "../ListDropdown"
-import { pokemonNatures } from "../../constants/dummy"
+import { POKEMON_NATURES } from "../../constants/dummy"
 
 const SearchAndFilter = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -55,7 +55,7 @@ const SearchAndFilter = () => {
                                         Natures
                                     </p>
 
-                                    <ListDropdown options={pokemonNatures} placeholder="Select Natures" />
+                                    <ListDropdown options={POKEMON_NATURES} placeholder="Select Natures" />
                                 </div>
                             </div>
 

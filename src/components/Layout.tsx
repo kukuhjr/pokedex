@@ -9,7 +9,7 @@ const Layout = () => {
         <Fragment>
             <Header />
 
-            <main className="h-screen px-3">
+            <main className="h-screen">
                 <Outlet />
             </main>
 

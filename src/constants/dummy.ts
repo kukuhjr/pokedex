@@ -1,4 +1,4 @@
-export const pokemonTypes = [
+export const POKEMON_TYPES = [
     {
         "name": "normal",
         "url": "https://pokeapi.co/api/v2/type/1/"
@@ -81,7 +81,7 @@ export const pokemonTypes = [
     }
 ]
 
-export const pokemonNatures = [
+export const POKEMON_NATURES = [
     {
         "name": "hardy",
         "url": "https://pokeapi.co/api/v2/nature/1/"
@@ -183,3 +183,56 @@ export const pokemonNatures = [
         "url": "https://pokeapi.co/api/v2/nature/25/"
     }
 ]
+
+export const POKEMON_STATS = [
+    {
+        "base_stat": 78,
+        "effort": 0,
+        "stat": {
+            "name": "hp",
+            "url": "https://pokeapi.co/api/v2/stat/1/"
+        }
+    },
+    {
+        "base_stat": 84,
+        "effort": 0,
+        "stat": {
+            "name": "attack",
+            "url": "https://pokeapi.co/api/v2/stat/2/"
+        }
+    },
+    {
+        "base_stat": 78,
+        "effort": 0,
+        "stat": {
+            "name": "defense",
+            "url": "https://pokeapi.co/api/v2/stat/3/"
+        }
+    },
+    {
+        "base_stat": 109,
+        "effort": 3,
+        "stat": {
+            "name": "special-attack",
+            "url": "https://pokeapi.co/api/v2/stat/4/"
+        }
+    },
+    {
+        "base_stat": 85,
+        "effort": 0,
+        "stat": {
+            "name": "special-defense",
+            "url": "https://pokeapi.co/api/v2/stat/5/"
+        }
+    },
+    {
+        "base_stat": 100,
+        "effort": 0,
+        "stat": {
+            "name": "speed",
+            "url": "https://pokeapi.co/api/v2/stat/6/"
+        }
+    }
+]
+
+export const POKEMON_MOVES = ["mega-punch","thunder-punch","fire-punch","mega-kick","headbutt","body-slam"]

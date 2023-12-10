@@ -1,8 +1,10 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
+
 import ChevronDownIcon from '../assets/icons/ChevronDownIcon'
-import { pokemonTypes } from '../constants/dummy'
 import CheckIcon from '../assets/icons/CheckIcon'
+
+import { POKEMON_TYPES } from '../constants/dummy'
 
 type OptionProps = {
     name: string,
@@ -15,7 +17,7 @@ type ListDropdownProps = {
     placeholder?: string
 }
 
-const ListDropdown = ({ options = pokemonTypes, customIcon = false, placeholder = "Select" }: ListDropdownProps) => {
+const ListDropdown = ({ options = POKEMON_TYPES, customIcon = false, placeholder = "Select" }: ListDropdownProps) => {
     const [selected, setSelected] = useState({ name: "placeholder" })
 
     return (
