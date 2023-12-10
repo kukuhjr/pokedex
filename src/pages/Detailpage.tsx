@@ -7,7 +7,6 @@ import ChevronLeftIcon from "../assets/icons/ChevronLeft"
 import Button from "../components/Button"
 import TabMenu from "../components/TabMenu"
 
-import FavoriteIcon from "../assets/icons/FavoriteIcon"
 import { printId } from "../constants/utils"
 import { GRADIENT_COLOR_TEMPLATE, POKEMON_NATURE_IMAGE } from "../constants/colors"
 
