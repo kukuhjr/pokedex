@@ -10,13 +10,24 @@ export type InfinitePokemonsAPI = {
     results: Array<OptionProps>
 }
 
-export type TypesPokemon = {
+export type TypesPokemonType = {
     slot: number,
     type: OptionProps
 }
 
-export type StatsPokemon =  {
+export type StatsPokemonType =  {
     base_stat: number,
     effort: number,
     stat: OptionProps
+}
+
+export type MovesPokemonType =  {
+    move: OptionProps,
+    version_group_details: VersionGroupDetailsPokemonType
+}
+
+export type VersionGroupDetailsPokemonType = {
+    level_learned_at: number,
+    move_learn_method: OptionProps,
+    version_group: OptionProps
 }
