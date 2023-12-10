@@ -54,7 +54,7 @@ const TabMenu = () => {
                                 key={idx}
                                 className={classNames(
                                     'rounded-xl py-4 px-4',
-                                    'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+                                    'ring-white/60 ring-offset-2 focus:outline-none'
                                 )}
                             >
                                 { posts.content }

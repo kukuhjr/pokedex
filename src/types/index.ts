@@ -9,3 +9,14 @@ export type InfinitePokemonsAPI = {
     previous: string,
     results: Array<OptionProps>
 }
+
+export type TypesPokemon = {
+    slot: number,
+    type: OptionProps
+}
+
+export type StatsPokemon =  {
+    base_stat: number,
+    effort: number,
+    stat: OptionProps
+}

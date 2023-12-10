@@ -6,6 +6,7 @@ import { useGetPokemonSpecies, useGetSinglePokemon } from "../../lib/react-query
 
 import { COLOR_TEMPLATE } from "../../constants/colors"
 import { printId } from "../../constants/utils"
+import { TypesPokemon } from "../../types"
 
 type PokemonCardProps = {
     pokemonId: number
@@ -44,7 +45,7 @@ const PokemonCard = ({ pokemonId }: PokemonCardProps) => {
                                 ....
                             </span> :
                         // NON LOADING
-                            pokemonData.types.map((type: any, idx: number) => (
+                            pokemonData.types.map((type: TypesPokemon, idx: number) => (
                                 <PokemonTypes
                                     key={`type-${idx}`}
                                     name={type.type.name}

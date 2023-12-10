@@ -9,6 +9,7 @@ import TabMenu from "../components/TabMenu"
 
 import { printId } from "../constants/utils"
 import { GRADIENT_COLOR_TEMPLATE, POKEMON_NATURE_IMAGE } from "../constants/colors"
+import ErrorFetchingText from "../components/ErrorFetchingText"
 
 
 const Detailpage = () => {
@@ -22,23 +23,21 @@ const Detailpage = () => {
         navigate("/")
     }
 
-    if(errorPokemonData) {
-        <div>
-            <span className="text-md text-gray-900">
-                Something went wrong.
-            </span>
-        </div>
-    }
-
     if(loadingPokemonData) {
         return (
             <div className="w-full flex items-center justify-center h-screen max-h-[800px]">
                 <img
                     src={'/src/assets/pokeball-loader.gif'}
                     alt="charizard"
-                    className="h-full aspect-square max-h-[200px]"
+                    className="h-full aspect-square max-h-[160px] lg:max-h-[200px]"
                 />
             </div>
+        )
+    }
+
+    if(errorPokemonData) {
+        return (
+            <ErrorFetchingText className="py-5" />
         )
     }
 
@@ -47,7 +46,7 @@ const Detailpage = () => {
             <div className={`
                     pt-3 px-3 h-[360px]
                     bg-gradient-to-b 
-                    ${GRADIENT_COLOR_TEMPLATE.get(loadingSpeciesData ? "default" : speciesData.color.name)}
+                    ${GRADIENT_COLOR_TEMPLATE.get(loadingSpeciesData || errorSpeciesData ? "default" : speciesData.color.name)}
                 `}
             >
                 {/* HEADER */}

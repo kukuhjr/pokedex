@@ -1,18 +1,41 @@
+import { useParams } from "react-router-dom"
+
+import { useGetPokemonSpecies, useGetSinglePokemon } from "../../lib/react-query/queriesAndMutations"
+
+import ErrorFetchingText from "../ErrorFetchingText"
 import Divider from "../Divider"
+import { PokemonTypesOnDetail } from "."
 
 const TabAboutContent = () => {
-    console.log("render about")
+    const { id } = useParams()
+
+    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(parseInt(id ?? ''), false)
+    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(parseInt(id ?? ''), false)
+
+    if(errorPokemonData) {
+        return (
+            <ErrorFetchingText className={"py-5"} />
+        )
+    }
 
     return (
         <div className="flex flex-col gap-y-5">
-            <p className="text-sm text-neutral-700 leading-6">
-                Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything. However, it never turns its fiery breath on any opponent weaker than itself.
-            </p>
+            {   loadingSpeciesData ? 
+                    '...' : 
+                errorSpeciesData ?
+                    <p className="text-sm text-neutral-700 leading-6">
+                        Failed to load description. Please refresh the page to try again.
+                    </p> :
+                // NON LOADING
+                    <p className="text-sm text-neutral-700 leading-6 text-justify">
+                        { speciesData.flavor_text_entries[Math.floor(Math.random() * 10)].flavor_text  }
+                    </p>
+            }
 
             <div className="about-box-custom">
                 <div className="w-full text-center p-2">
                     <p className="text-sm text-neutral-900 font-semibold leading-5">
-                        90,5 kg
+                        { loadingPokemonData ? '...' : `${pokemonData.weight / 10} kg` }
                     </p>
 
                     <span className="text-xs text-neutral-700 leading-3">
@@ -26,7 +49,7 @@ const TabAboutContent = () => {
 
                 <div className="w-full text-center p-2">
                     <p className="text-sm text-neutral-900 font-semibold leading-5">
-                        170 cm
+                        { loadingPokemonData ? '...' : `${pokemonData.height / 10} m` }
                     </p>
 
                     <span className="text-xs text-neutral-700 leading-3">
@@ -37,9 +60,7 @@ const TabAboutContent = () => {
 
             <div className="about-box-custom">
                 <div className="w-full text-center p-2">
-                    <p className="text-sm text-neutral-900 font-semibold leading-5">
-                        90,5 kg
-                    </p>
+                    { loadingPokemonData ? '...' : <PokemonTypesOnDetail types={pokemonData.types} /> }
 
                     <span className="text-xs text-neutral-700 leading-3">
                         Category
@@ -50,9 +71,9 @@ const TabAboutContent = () => {
                     <Divider />
                 </div>
 
-                <div className="w-full text-center p-2">
-                    <p className="text-sm text-neutral-900 font-semibold leading-5">
-                        Blaze, Solar-Power
+                <div className="w-full text-center p-2 relative grow-1 truncate">
+                    <p className="text-sm text-neutral-900 font-semibold leading-5 capitalize">
+                        { loadingPokemonData ? '...' : `${ pokemonData.abilities.map((item: any) => item.ability.name).join(",") }` }
                     </p>
 
                     <span className="text-xs text-neutral-700 leading-3">

@@ -4,19 +4,21 @@ import { QUERY_KEYS } from "./queryKeys";
 import { getInfinitePokemons, getPokemonSpecies, getSinglePokemon } from "../api";
 import { InfinitePokemonsAPI, OptionProps } from "../../types";
 
-export const useGetSinglePokemon = (id: number) => {
+export const useGetSinglePokemon = (id: number, enabled?: boolean) => {
     return useQuery({
       queryKey: [QUERY_KEYS.GET_POKEMON, id],
       queryFn: () => getSinglePokemon({ pokemonId: id }),
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      enabled: enabled ? enabled : true
     });
 };
 
-export const useGetPokemonSpecies = (id: number) => {
+export const useGetPokemonSpecies = (id: number, enabled?: boolean) => {
     return useQuery({
       queryKey: [QUERY_KEYS.GET_SPECIES_POKEMONS, id],
       queryFn: () => getPokemonSpecies({ pokemonId: id }),
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      enabled: enabled ? enabled : true
     });
 };
 
