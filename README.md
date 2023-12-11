@@ -1,5 +1,5 @@
 # Pokedex
-All Pokemons wiki. Sera test purpose.
+All Pokemons wiki app mobile first view. Sera test purpose.
 
 Install dependencies:
 ```
@@ -12,7 +12,6 @@ Run dev mode:
 ```
 
 ## Tech
-
 Pokedex uses a number of open source projects:
 
 - ReactJS
