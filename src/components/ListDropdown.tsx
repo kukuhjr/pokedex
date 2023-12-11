@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 
 import ChevronDownIcon from '../assets/icons/ChevronDownIcon'
@@ -11,12 +11,18 @@ import { OptionProps } from '../types'
 type ListDropdownProps = {
     options?: Array<OptionProps>,
     customIcon?: boolean,
-    placeholder?: string
+    placeholder?: string,
+    selected: OptionProps,
+    setSelected: any
 }
 
-const ListDropdown = ({ options = POKEMON_TYPES, customIcon = false, placeholder = "Select" }: ListDropdownProps) => {
-    const [selected, setSelected] = useState({ name: "placeholder" })
-
+const ListDropdown = ({ 
+    options = POKEMON_TYPES,
+    customIcon = false,
+    placeholder = "Select",
+    selected,
+    setSelected
+}: ListDropdownProps) => {
     return (
         <div>
             <Listbox value={selected} onChange={setSelected}>
@@ -32,7 +38,14 @@ const ListDropdown = ({ options = POKEMON_TYPES, customIcon = false, placeholder
                         "
                         placeholder='select'
                     >
-                        <span className="block truncate">
+                        <span className="truncate flex items-center gap-x-2">
+                            { customIcon && 
+                                <img
+                                    src={`/src/assets/pokemon_types/${POKEMON_NATURE_IMAGE.get(selected.name)}`}
+                                    height={19}
+                                    width={19}
+                                /> 
+                            }
                             {selected.name === "placeholder" ? placeholder : selected.name}
                         </span>
                         

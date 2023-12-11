@@ -14,7 +14,11 @@ type PokemonCardProps = {
 
 const PokemonCard = ({ pokemonId }: PokemonCardProps) => {
     const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(pokemonId)
-    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(pokemonId)
+    const speciesUrl = pokemonData?.species?.url ?? ""
+    const splitSpeciesUrl = speciesUrl?.split("/") ?? ""
+    const speciesId = parseInt(splitSpeciesUrl[splitSpeciesUrl?.length - 2])
+
+    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId ?? "", !!speciesId)
 
     if(errorPokemonData) {
         return (
@@ -29,7 +33,7 @@ const PokemonCard = ({ pokemonId }: PokemonCardProps) => {
     return (
         <div className={`w-full rounded-lg p-4 ${loadingSpeciesData || errorSpeciesData ? 'bg-sky-400' : COLOR_TEMPLATE.get(speciesData.color.name)} text-neutral-50`}>
             <div className="flex justify-between">
-                <span className="text-sm capitalize font-medium">
+                <span className="text-sm capitalize font-medium line-clamp-1">
                     { loadingPokemonData ? "..." : pokemonData.name }
                 </span>
 
@@ -56,7 +60,7 @@ const PokemonCard = ({ pokemonId }: PokemonCardProps) => {
 
                 <div>
                     <img 
-                        src={loadingPokemonData ? pokeball : pokemonData.sprites?.other["official-artwork"].front_default}
+                        src={loadingPokemonData ? pokeball : pokemonData.sprites?.other["official-artwork"]?.front_default ?? pokeball}
                         height={"60px"}
                         width={"60px"}
                         className="sm:w-[80px] sm:h-[80px] lg:w-[100px] lg:h-[100px]"

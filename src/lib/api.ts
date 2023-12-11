@@ -61,3 +61,17 @@ export async function getPokemonEvolutions({ evolutionId }: { evolutionId: numbe
         console.log(error);
     }
 }
+
+// GET TYPE BY ID
+// DESC: GET TYPE BY TYPE ID
+export async function getTypeById({ typeId }: { typeId: number }) {
+    try {
+        const { data } = await axios.get(`${API_CONSTANT}/type/${typeId}`)
+
+        if(!data) throw Error
+
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}

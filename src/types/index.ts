@@ -10,6 +10,18 @@ export type InfinitePokemonsAPI = {
     results: Array<OptionProps>
 }
 
+export type ResultsPokemonType ={
+    pokemon: OptionProps,
+    slot: number
+}
+
+export type TypePokemonsAPI = {
+    count: number,
+    next: string,
+    previous: string,
+    results: Array<ResultsPokemonType>
+}
+
 export type TypesPokemonType = {
     slot: number,
     type: OptionProps

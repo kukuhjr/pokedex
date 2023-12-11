@@ -17,7 +17,11 @@ const Detailpage = () => {
     const { id } = useParams()
 
     const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(parseInt(id ?? ''))
-    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(parseInt(id ?? ''))
+    const speciesUrl = pokemonData?.species?.url ?? ""
+    const splitSpeciesUrl = speciesUrl?.split("/") ?? ""
+    const speciesId = parseInt(splitSpeciesUrl[splitSpeciesUrl?.length - 2])
+
+    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId ?? "", !!speciesId)
 
     const handleClickBackButton = () => {
         navigate("/")

@@ -5,14 +5,14 @@ type ButtonProps = {
     label?: string,
     icon?: React.ReactNode,
     className?: string,
-    onClick: React.MouseEventHandler<HTMLButtonElement>
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const Button = ({
     label,
     icon,
     className,
-    onClick
+    onClick = () => {}
 }: ButtonProps) => {
     return (
         <button

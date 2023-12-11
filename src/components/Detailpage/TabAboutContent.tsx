@@ -10,7 +10,11 @@ const TabAboutContent = () => {
     const { id } = useParams()
 
     const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(parseInt(id ?? ''), false)
-    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(parseInt(id ?? ''), false)
+    const speciesUrl = pokemonData?.species?.url ?? ""
+    const splitSpeciesUrl = speciesUrl?.split("/") ?? ""
+    const speciesId = parseInt(splitSpeciesUrl[splitSpeciesUrl?.length - 2])
+
+    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId ?? "", !!speciesId)
 
     if(errorPokemonData) {
         return (
