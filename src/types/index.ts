@@ -31,3 +31,10 @@ export type VersionGroupDetailsPokemonType = {
     move_learn_method: OptionProps,
     version_group: OptionProps
 }
+
+export type EvolutionPokemonType =  {
+    evolution_details: Array<any>,
+    evolves_to: Array<EvolutionPokemonType>,
+    is_baby: boolean,
+    species: OptionProps
+}

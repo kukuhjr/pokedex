@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQueries, useQuery } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "./queryKeys";
-import { getInfinitePokemons, getPokemonSpecies, getSinglePokemon } from "../api";
+import { getInfinitePokemons, getPokemonEvolutions, getPokemonSpecies, getSinglePokemon } from "../api";
 import { InfinitePokemonsAPI, OptionProps } from "../../types";
 
 export const useGetSinglePokemon = (id: number, enabled?: boolean) => {
@@ -17,6 +17,15 @@ export const useGetPokemonSpecies = (id: number, enabled?: boolean) => {
     return useQuery({
       queryKey: [QUERY_KEYS.GET_SPECIES_POKEMONS, id],
       queryFn: () => getPokemonSpecies({ pokemonId: id }),
+      refetchOnWindowFocus: false,
+      enabled: enabled ? enabled : true
+    });
+};
+
+export const useGetPokemonEvolutions = (evoId: number, enabled?: boolean) => {
+    return useQuery({
+      queryKey: [QUERY_KEYS.GET_POKEMON_EVOLUTIONS, evoId],
+      queryFn: () => getPokemonEvolutions({ evolutionId: evoId }),
       refetchOnWindowFocus: false,
       enabled: enabled ? enabled : true
     });

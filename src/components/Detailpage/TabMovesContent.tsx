@@ -24,7 +24,7 @@ const TabMovesContent = () => {
                     </p> :
                 // NON LOADING
                 pokemonData.moves.map((move: MovesPokemonType, idx: number) => (
-                    <div className="underline-moves-item py-5" key={`move-${idx}`}>
+                    <div className={`underline-moves-item ${idx === 0 ? 'pb-4' : 'py-4'} capitalize`} key={`move-${idx}`}>
                         { move.move.name }
                     </div>
                 )) 

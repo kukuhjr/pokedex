@@ -27,7 +27,7 @@ const TabMenu = () => {
     }
     
     return (
-        <div className="w-full px-2 py-16 sm:px-0 max-w-xl">
+        <div className="w-full px-2 pt-16 sm:px-0 max-w-xl">
             <Tab.Group>
                 <Tab.List className="flex space-x-1 p-1">
                     {Object.keys(categories).map((category) => (

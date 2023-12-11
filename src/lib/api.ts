@@ -47,3 +47,17 @@ export async function getPokemonSpecies({ pokemonId }: { pokemonId: number }) {
         console.log(error);
     }
 }
+
+// GET POKEMON EVOLUTIONS
+// DESC: GET POKEMON EVOLUTIONS CHAIN
+export async function getPokemonEvolutions({ evolutionId }: { evolutionId: number }) {
+    try {
+        const { data } = await axios.get(`${API_CONSTANT}/evolution-chain/${evolutionId}`)
+
+        if(!data) throw Error
+
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}

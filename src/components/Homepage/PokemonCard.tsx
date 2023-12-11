@@ -1,4 +1,4 @@
-import pikachu from "../../assets/pokeball.png"
+import pokeball from "../../assets/pokeball.png"
 
 import PokemonTypes from "../PokemonCard/PokemonTypes"
 
@@ -56,7 +56,7 @@ const PokemonCard = ({ pokemonId }: PokemonCardProps) => {
 
                 <div>
                     <img 
-                        src={loadingPokemonData ? pikachu : pokemonData.sprites?.other["official-artwork"].front_default }
+                        src={loadingPokemonData ? pokeball : pokemonData.sprites?.other["official-artwork"].front_default}
                         height={"60px"}
                         width={"60px"}
                         className="sm:w-[80px] sm:h-[80px] lg:w-[100px] lg:h-[100px]"

@@ -9,3 +9,10 @@ export function cn(...inputs: ClassValue[]) {
 export function printId(num: number) {
   return String(num).padStart(4, '0')
 }
+
+export function getIdOnUrl(url: string) {
+  const splitUrl = url.split("/")
+  const id = parseInt(splitUrl[splitUrl?.length - 2])
+
+  return id
+}
