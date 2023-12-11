@@ -7,7 +7,7 @@ import ChevronLeftIcon from "../assets/icons/ChevronLeft"
 import Button from "../components/Button"
 import TabMenu from "../components/TabMenu"
 
-import { printId } from "../constants/utils"
+import { getIdOnUrl, printId } from "../constants/utils"
 import { GRADIENT_COLOR_TEMPLATE, POKEMON_NATURE_IMAGE } from "../constants/colors"
 import ErrorFetchingText from "../components/ErrorFetchingText"
 
@@ -16,12 +16,10 @@ const Detailpage = () => {
     const navigate = useNavigate()
     const { id } = useParams()
 
-    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(parseInt(id ?? ''))
-    const speciesUrl = pokemonData?.species?.url ?? ""
-    const splitSpeciesUrl = speciesUrl?.split("/") ?? ""
-    const speciesId = parseInt(splitSpeciesUrl[splitSpeciesUrl?.length - 2])
+    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData, isFetched } = useGetSinglePokemon(id ?? '')
+    const speciesId = getIdOnUrl(pokemonData?.species?.url ?? "")
 
-    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId ?? "", !!speciesId)
+    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId ?? "", isFetched)
 
     const handleClickBackButton = () => {
         navigate("/")

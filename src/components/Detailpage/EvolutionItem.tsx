@@ -1,16 +1,18 @@
 import pokeball from "../../assets/pokeball.png"
 
-import Divider from "../Divider"
-
 import { useGetSinglePokemon } from "../../lib/react-query/queriesAndMutations"
 import { TypesPokemonType } from "../../types"
-import { printId } from "../../constants/utils"
+
+import Divider from "../Divider"
+
+import { cn, printId } from "../../constants/utils"
 import { POKEMON_NATURE_IMAGE } from "../../constants/colors"
 
 type EvolutionItem = {
-    id: number,
+    id: string,
     name: string,
-    minLevel: number
+    minLevel: number,
+    isFirst: boolean
 }
 
 const TypesEvoItem = ({ type } :{type: string }) => {
@@ -30,28 +32,31 @@ const TypesEvoItem = ({ type } :{type: string }) => {
     )
 }
 
-const EvolutionItem = ({ id, name, minLevel }: EvolutionItem) => {
+const EvolutionItem = ({ id, name, minLevel, isFirst }: EvolutionItem) => {
     const { data: pokemonData, isPending: loadingPokemonData } = useGetSinglePokemon(id, false)
 
     return (
         <>
-            {   minLevel !== 0 &&
-                    <div className="flex">
-                        <div className="basis-1/2 relative max-w-[180px]">
-                            <div className="h-full absolute left-1/2">
+            <div className="flex">
+                <div className="basis-1/2 relative max-w-[180px]">
+
+                    {   !isFirst &&
+                            <div className={cn(`h-full absolute left-1/2 min-h-[40px]`, minLevel=== null || minLevel === 0 ? `flex relative` : ``)}>
                                 <Divider />
                             </div>
+                    }
 
+                    {   (minLevel !== null && minLevel !== 0) &&
                             <div className="w-full text-right pr-2">
                                 <span className="text-sm font-light text-neutral-400 leading-10">
                                     Level { minLevel }
                                 </span>
                             </div>
-                        </div>
+                    }
+                </div>
 
-                        <div className="basis-1/2" />
-                    </div>
-            }
+                <div className="basis-1/2" />
+            </div>
 
             <div className="flex jutify-center items-start gap-x-5">
                 <div className="flex-1 bg-blue-200/[0.3] rounded-3xl p-3 flex justify-center max-w-[180px]">

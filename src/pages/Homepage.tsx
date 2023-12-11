@@ -2,17 +2,17 @@ import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { useQueryClient } from "@tanstack/react-query"
 
-import { OptionProps } from "../types"
 import { FilterContext } from "../lib/hooks/filterContext"
 import { useGetInfinitePokemons, useGetType } from "../lib/react-query/queriesAndMutations"
 import { QUERY_KEYS } from "../lib/react-query/queryKeys"
+import { OptionProps } from "../types"
+import { getIdOnUrl } from "../constants/utils"
 
 import PokemonGridList from "../components/Homepage/PokemonGridList"
 import SearchAndFilter from "../components/Homepage/SearchAndFilter"
 import ErrorFetchingText from "../components/ErrorFetchingText"
-
-import { getIdOnUrl } from "../constants/utils"
 import PokeballLoader from "../components/PokeballLoader"
+
 
 const INITIAL_FILTER_VAL = { name: "placeholder", url: "" }
 
@@ -22,7 +22,8 @@ const Homepage = () => {
 
     const { ref, inView } = useInView()
     const { data: listPokemons, isPending, isError, fetchNextPage, hasNextPage } = useGetInfinitePokemons()
-    const { data: listPokemonNature, isPending: isloadingPokemonNature, isError: errorPokemonNature, refetch } = useGetType(getIdOnUrl(selected.url), filterView)
+    
+    const { data: listPokemonNature, isPending: isloadingPokemonNature, isError: errorPokemonNature, refetch } = useGetType(getIdOnUrl(selected.url) ?? "", filterView && selected.url !== "")
 
     const queryClient = useQueryClient()
 

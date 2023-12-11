@@ -8,7 +8,7 @@ import { MovesPokemonType } from "../../types"
 const TabMovesContent = () => {
     const { id } = useParams()
 
-    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(parseInt(id ?? ''), false)
+    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(id ?? '', false)
 
     if(errorPokemonData) {
         return (

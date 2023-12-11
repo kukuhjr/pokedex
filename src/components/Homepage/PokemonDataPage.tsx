@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { InfinitePokemonsAPI, TypePokemonsAPI } from '../../types'
+import { getIdOnUrl } from '../../constants/utils'
 
 import PokemonCard from './PokemonCard'
 
@@ -16,14 +17,13 @@ const PokemonDataPage = ({ isFilter, dataList, filterDataList }: PokemonDataPage
         return (
             <>
                 {   filterDataList?.results?.map((pokemon, idx) => {
-                        const splitUrl = pokemon.pokemon.url?.split("/")
+                        const splitUrl = getIdOnUrl(pokemon.pokemon.url)
                         return (
-                            <Link to={`/${splitUrl[splitUrl.length - 2]}`} key={`pokemon-${idx}`}>
-                                <PokemonCard pokemonId={parseInt(splitUrl[splitUrl.length - 2])} />
+                            <Link to={`/${splitUrl}`} key={`pokemon-${idx}`}>
+                                <PokemonCard pokemonId={splitUrl} />
                             </Link>
                         )
-                    }
-                    ) 
+                    }) 
                 }
             </>
         )
@@ -32,14 +32,14 @@ const PokemonDataPage = ({ isFilter, dataList, filterDataList }: PokemonDataPage
     return (
         <>
             {   dataList?.results?.map((pokemon, idx) => {
-                    const splitUrl = pokemon.url?.split("/")
+                    const splitUrl = getIdOnUrl(pokemon.url)
+
                     return (
-                        <Link to={`/${splitUrl[splitUrl.length - 2]}`} key={`pokemon-${idx}`}>
-                            <PokemonCard pokemonId={parseInt(splitUrl[splitUrl.length - 2])} />
+                        <Link to={`/${splitUrl}`} key={`pokemon-${idx}`}>
+                            <PokemonCard pokemonId={splitUrl} />
                         </Link>
                     )
-                }
-                ) 
+                })
             }
         </>
     )

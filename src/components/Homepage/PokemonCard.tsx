@@ -1,24 +1,23 @@
 import pokeball from "../../assets/pokeball.png"
 
-import PokemonTypes from "../PokemonCard/PokemonTypes"
-
+import { TypesPokemonType } from "../../types"
 import { useGetPokemonSpecies, useGetSinglePokemon } from "../../lib/react-query/queriesAndMutations"
 
 import { COLOR_TEMPLATE } from "../../constants/colors"
-import { printId } from "../../constants/utils"
-import { TypesPokemonType } from "../../types"
+import { getIdOnUrl, printId } from "../../constants/utils"
+
+import PokemonTypes from "../PokemonCard/PokemonTypes"
 
 type PokemonCardProps = {
-    pokemonId: number
+    pokemonId: string
 }
 
 const PokemonCard = ({ pokemonId }: PokemonCardProps) => {
-    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(pokemonId)
-    const speciesUrl = pokemonData?.species?.url ?? ""
-    const splitSpeciesUrl = speciesUrl?.split("/") ?? ""
-    const speciesId = parseInt(splitSpeciesUrl[splitSpeciesUrl?.length - 2])
+    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData, isFetched } = useGetSinglePokemon(pokemonId)
+    const speciesId = getIdOnUrl(pokemonData?.species?.url ?? "")
 
-    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId ?? "", !!speciesId)
+    // pokemonData !== undefined
+    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId, isFetched)
 
     if(errorPokemonData) {
         return (

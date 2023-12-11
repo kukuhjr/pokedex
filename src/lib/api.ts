@@ -4,7 +4,7 @@ const API_CONSTANT = 'https://pokeapi.co/api/v2'
 
 // GET INFINITE POKEMONS
 // DESC: GET ALL POKEMONS BY INFINITE LIST
-export async function getInfinitePokemons({ pageParam = `${API_CONSTANT}/pokemon?limit=50&offset=0` }: { pageParam?: string }) {
+export async function getInfinitePokemons({ pageParam = `${API_CONSTANT}/pokemon?limit=20&offset=0` }: { pageParam?: string }) {
     try {
         const { data } = await axios.get(pageParam)
 
@@ -18,15 +18,11 @@ export async function getInfinitePokemons({ pageParam = `${API_CONSTANT}/pokemon
 
 // GET SINGLE POKEMONS
 // DESC: GET POKEMON DETAIL
-export async function getSinglePokemon({ pokemonId }: { pokemonId: number }) {
+export async function getSinglePokemon({ pokemonId }: { pokemonId: string }) {
     try {
         const { data } = await axios.get(`${API_CONSTANT}/pokemon/${pokemonId}`)
 
         if(!data) throw Error
-
-        setTimeout(() => {
-
-        }, 4000)
 
         return data
     } catch (error) {
@@ -36,7 +32,7 @@ export async function getSinglePokemon({ pokemonId }: { pokemonId: number }) {
 
 // GET POKEMON SPECIES
 // DESC: GET SPECIES OF SINGLE POKEMON
-export async function getPokemonSpecies({ pokemonId }: { pokemonId: number }) {
+export async function getPokemonSpecies({ pokemonId }: { pokemonId: string }) {
     try {
         const { data } = await axios.get(`${API_CONSTANT}/pokemon-species/${pokemonId}`)
 
@@ -50,7 +46,7 @@ export async function getPokemonSpecies({ pokemonId }: { pokemonId: number }) {
 
 // GET POKEMON EVOLUTIONS
 // DESC: GET POKEMON EVOLUTIONS CHAIN
-export async function getPokemonEvolutions({ evolutionId }: { evolutionId: number }) {
+export async function getPokemonEvolutions({ evolutionId }: { evolutionId: string }) {
     try {
         const { data } = await axios.get(`${API_CONSTANT}/evolution-chain/${evolutionId}`)
 
@@ -64,7 +60,7 @@ export async function getPokemonEvolutions({ evolutionId }: { evolutionId: numbe
 
 // GET TYPE BY ID
 // DESC: GET TYPE BY TYPE ID
-export async function getTypeById({ typeId }: { typeId: number }) {
+export async function getTypeById({ typeId }: { typeId: string }) {
     try {
         const { data } = await axios.get(`${API_CONSTANT}/type/${typeId}`)
 

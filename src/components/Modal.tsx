@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
+
+import CloseIcon from '../assets/icons/CloseIcon'
+
 import { Dialog, Transition } from '@headlessui/react'
 import Button from './Button'
-import CloseIcon from '../assets/icons/CloseIcon'
 
 type ModalProps = {
     title: string,

@@ -1,13 +1,13 @@
 import { useContext, useState } from "react"
 
 import FilterIcon from "../../assets/icons/FilterIcon"
+import CloseIcon from "../../assets/icons/CloseIcon"
 
 import { FilterContext } from "../../lib/hooks/filterContext"
 
 import Button from "../Button"
 import Modal from "../Modal"
 import ListDropdown from "../ListDropdown"
-import CloseIcon from "../../assets/icons/CloseIcon"
 
 const INITIAL_FILTER_VAL = { name: "placeholder", url: "" }
 

@@ -9,7 +9,7 @@ import ErrorFetchingText from "../ErrorFetchingText"
 const TabStatsContent = () => {
     const { id } = useParams()
 
-    const { data: pokemonData, isError: errorPokemonData } = useGetSinglePokemon(parseInt(id ?? ''), false)
+    const { data: pokemonData, isError: errorPokemonData } = useGetSinglePokemon(id ?? '', false)
 
     function printStatsName(name: string) {
         if(name.includes("special-attack")) return 'sp. att'

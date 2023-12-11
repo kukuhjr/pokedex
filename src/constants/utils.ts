@@ -12,7 +12,7 @@ export function printId(num: number) {
 
 export function getIdOnUrl(url: string) {
   const splitUrl = url.split("/")
-  const id = parseInt(splitUrl[splitUrl?.length - 2])
+  const id = splitUrl[splitUrl.length - 2]
 
   return id
 }

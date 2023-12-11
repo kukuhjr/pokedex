@@ -1,10 +1,12 @@
 import { useInfiniteQuery, useQueries, useQuery } from "@tanstack/react-query";
 
-import { QUERY_KEYS } from "./queryKeys";
 import { getInfinitePokemons, getPokemonEvolutions, getPokemonSpecies, getSinglePokemon, getTypeById } from "../api";
-import { InfinitePokemonsAPI, OptionProps } from "../../types";
 
-export const useGetSinglePokemon = (id: number, enabled?: boolean) => {
+import { InfinitePokemonsAPI, OptionProps } from "../../types";
+import { QUERY_KEYS } from "./queryKeys";
+import { getIdOnUrl } from "../../constants/utils";
+
+export const useGetSinglePokemon = (id: string, enabled?: boolean) => {
     return useQuery({
       queryKey: [QUERY_KEYS.GET_POKEMON, id],
       queryFn: () => getSinglePokemon({ pokemonId: id }),
@@ -13,16 +15,16 @@ export const useGetSinglePokemon = (id: number, enabled?: boolean) => {
     });
 };
 
-export const useGetPokemonSpecies = (id: number, enabled?: boolean) => {
+export const useGetPokemonSpecies = (id: string, enabled?: boolean) => {
     return useQuery({
       queryKey: [QUERY_KEYS.GET_SPECIES_POKEMONS, id],
       queryFn: () => getPokemonSpecies({ pokemonId: id }),
       refetchOnWindowFocus: false,
-      enabled: enabled ? enabled : true
+      enabled: enabled ? enabled : false
     });
 };
 
-export const useGetPokemonEvolutions = (evoId: number, enabled?: boolean) => {
+export const useGetPokemonEvolutions = (evoId: string, enabled?: boolean) => {
     return useQuery({
       queryKey: [QUERY_KEYS.GET_POKEMON_EVOLUTIONS, evoId],
       queryFn: () => getPokemonEvolutions({ evolutionId: evoId }),
@@ -31,7 +33,7 @@ export const useGetPokemonEvolutions = (evoId: number, enabled?: boolean) => {
     });
 };
 
-export const useGetType = (typeId: number, enabled?: boolean) => {
+export const useGetType = (typeId: string, enabled?: boolean) => {
     return useQuery({
       queryKey: [QUERY_KEYS.GET_TYPE, typeId],
       queryFn: () => getTypeById({ typeId }),
@@ -45,8 +47,7 @@ export const useGetSinglePokemon_2 = (pokemons: Array<OptionProps>) => {
     return useQueries({
         queries: pokemons.map((pokemon) => {
             // GET ID BY URL
-            const splitUrl = pokemon.url.split("/")
-            const pokemonId = parseInt(splitUrl[splitUrl.length - 2])
+            const pokemonId = getIdOnUrl(pokemon.url) ?? ""
 
             return {
                 queryKey: [QUERY_KEYS.GET_POKEMON, pokemonId],

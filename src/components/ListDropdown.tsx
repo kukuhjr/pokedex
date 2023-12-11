@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
 
 import ChevronDownIcon from '../assets/icons/ChevronDownIcon'
 import CheckIcon from '../assets/icons/CheckIcon'
@@ -7,6 +6,8 @@ import CheckIcon from '../assets/icons/CheckIcon'
 import { POKEMON_TYPES } from '../constants/dummy'
 import { POKEMON_NATURE_IMAGE } from '../constants/colors'
 import { OptionProps } from '../types'
+
+import { Listbox, Transition } from '@headlessui/react'
 
 type ListDropdownProps = {
     options?: Array<OptionProps>,

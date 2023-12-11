@@ -5,16 +5,15 @@ import { useGetPokemonSpecies, useGetSinglePokemon } from "../../lib/react-query
 import ErrorFetchingText from "../ErrorFetchingText"
 import Divider from "../Divider"
 import { PokemonTypesOnDetail } from "."
+import { getIdOnUrl } from "../../constants/utils"
 
 const TabAboutContent = () => {
     const { id } = useParams()
 
-    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(parseInt(id ?? ''), false)
-    const speciesUrl = pokemonData?.species?.url ?? ""
-    const splitSpeciesUrl = speciesUrl?.split("/") ?? ""
-    const speciesId = parseInt(splitSpeciesUrl[splitSpeciesUrl?.length - 2])
+    const { data: pokemonData, isPending: loadingPokemonData, isError: errorPokemonData } = useGetSinglePokemon(id ?? '', false)
+    const speciesId = getIdOnUrl(pokemonData?.species?.url ?? "")
 
-    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId ?? "", !!speciesId)
+    const { data: speciesData, isPending: loadingSpeciesData, isError: errorSpeciesData } = useGetPokemonSpecies(speciesId)
 
     if(errorPokemonData) {
         return (
