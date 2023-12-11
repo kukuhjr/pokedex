@@ -36,7 +36,7 @@ export const useGetType = (typeId: number, enabled?: boolean) => {
       queryKey: [QUERY_KEYS.GET_TYPE, typeId],
       queryFn: () => getTypeById({ typeId }),
       refetchOnWindowFocus: false,
-      enabled: false
+      enabled: enabled ? enabled : false
     });
 };
 

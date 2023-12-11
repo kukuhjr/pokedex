@@ -4,7 +4,7 @@ import { OptionProps } from '../../types';
 interface FilterContextState {
     filterValue: OptionProps | undefined,
     setFilterValue: any | undefined,
-    handleSubmitFilter: () => void,
+    handleSubmitFilter: (newVal: OptionProps) => void,
     handleClearFilter: () => void,
     filterView: boolean
 }

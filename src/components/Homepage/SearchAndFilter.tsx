@@ -9,10 +9,13 @@ import Modal from "../Modal"
 import ListDropdown from "../ListDropdown"
 import CloseIcon from "../../assets/icons/CloseIcon"
 
+const INITIAL_FILTER_VAL = { name: "placeholder", url: "" }
+
 const SearchAndFilter = () => {
-        const filterState = useContext(FilterContext)
+    const filterState = useContext(FilterContext)
 
     const [isOpen, setIsOpen] = useState(false)
+    const [val, setVal] = useState(filterState?.filterValue ?? INITIAL_FILTER_VAL)
 
     const handleClickOpenModal = () => { setIsOpen(true) }
     const handleClickCloseModal = () => { setIsOpen(false) }
@@ -64,8 +67,8 @@ const SearchAndFilter = () => {
                                     <ListDropdown
                                         customIcon
                                         placeholder="Select Types"
-                                        selected={filterState?.filterValue ?? { name: "", url: "" }}
-                                        setSelected={filterState?.setFilterValue}
+                                        selected={val}
+                                        setSelected={setVal}
                                     />
                                 </div>
 
@@ -82,7 +85,12 @@ const SearchAndFilter = () => {
                                 <Button 
                                     label="Apply"
                                     className="w-full font-medium rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-neutral-800 focus-visible:ring-yellow-600"
-                                    onClick={filterState?.handleSubmitFilter}
+                                    onClick={() => {
+                                        if(val.name !== "placeholder") {
+                                            filterState?.handleSubmitFilter(val)
+                                            handleClickCloseModal()
+                                        }
+                                    }}
                                 />
                             </div>
                         </div>

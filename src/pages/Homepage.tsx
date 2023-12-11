@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
+import { useQueryClient } from "@tanstack/react-query"
 
+import { OptionProps } from "../types"
 import { FilterContext } from "../lib/hooks/filterContext"
 import { useGetInfinitePokemons, useGetType } from "../lib/react-query/queriesAndMutations"
+import { QUERY_KEYS } from "../lib/react-query/queryKeys"
 
 import PokemonGridList from "../components/Homepage/PokemonGridList"
 import SearchAndFilter from "../components/Homepage/SearchAndFilter"
-import { getIdOnUrl } from "../constants/utils"
 import ErrorFetchingText from "../components/ErrorFetchingText"
+
+import { getIdOnUrl } from "../constants/utils"
+import PokeballLoader from "../components/PokeballLoader"
 
 const INITIAL_FILTER_VAL = { name: "placeholder", url: "" }
 
@@ -17,14 +22,22 @@ const Homepage = () => {
 
     const { ref, inView } = useInView()
     const { data: listPokemons, isPending, isError, fetchNextPage, hasNextPage } = useGetInfinitePokemons()
-    const { data: listPokemonNature, isPending: isloadingPokemonNature, isError: errorPokemonNature, refetch } = useGetType(getIdOnUrl(selected.url), false)
+    const { data: listPokemonNature, isPending: isloadingPokemonNature, isError: errorPokemonNature, refetch } = useGetType(getIdOnUrl(selected.url), filterView)
 
-    const handleClickApplyFilter = () => {
-        setFilterView(true)
+    const queryClient = useQueryClient()
+
+    const handleClickApplyFilter = (newVal: OptionProps) => {
+        if(!filterView) setFilterView(true)
+        
+        setSelected(newVal)
         refetch()
     }
 
     const handleClearFilter = () => {
+        queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.GET_INFINITE_POKEMONS]
+        })
+
         setSelected(INITIAL_FILTER_VAL)
         setFilterView(false)
     }
@@ -59,14 +72,14 @@ const Homepage = () => {
                 <div className="mt-6">
                     {   !filterView ?
                             isPending && !listPokemons ?
-                                <p>Loading...</p> :
+                                <PokeballLoader /> :
                             isError ?
                                 <ErrorFetchingText className="py-0" /> :
                             // NON LOADING
                                 <PokemonGridList pages={listPokemons.pages} /> :
                         // BY FILTER
                             isloadingPokemonNature && !listPokemonNature ?
-                                <p>Loading...</p> :
+                                <PokeballLoader /> :
                             errorPokemonNature ?
                                 <ErrorFetchingText className="py-0" /> :
                             // SUCCESS

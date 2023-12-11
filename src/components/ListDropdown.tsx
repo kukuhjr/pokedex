@@ -25,7 +25,7 @@ const ListDropdown = ({
 }: ListDropdownProps) => {
     return (
         <div>
-            <Listbox value={selected} onChange={setSelected}>
+            <Listbox value={selected} onChange={(val) => { setSelected(val) }}>
                 <div className="relative mt-1">
                     <Listbox.Button 
                         className="
@@ -39,7 +39,7 @@ const ListDropdown = ({
                         placeholder='select'
                     >
                         <span className="truncate flex items-center gap-x-2">
-                            { customIcon && 
+                            { customIcon && selected.name !== "placeholder" &&
                                 <img
                                     src={`/src/assets/pokemon_types/${POKEMON_NATURE_IMAGE.get(selected.name)}`}
                                     height={19}

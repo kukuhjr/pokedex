@@ -1,6 +1,6 @@
 export const COLOR_TEMPLATE = new Map([
     ["red", "bg-red-800"],
-    ["black", "bg-black-600"],
+    ["black", "bg-neutral-800"],
     ["blue", "bg-sky-700"],
     ["brown", "bg-yellow-800"],
     ["gray", "bg-gray-600"],
@@ -13,7 +13,7 @@ export const COLOR_TEMPLATE = new Map([
 
 export const GRADIENT_COLOR_TEMPLATE = new Map<string, string>([
     ["red", "from-red-400 from-0% via-red-300 via-50% to-neutral-50 to-100%"],
-    ["black", "from-black-400 from-0% via-black-300 via-50% to-neutral-50 to-100%"],
+    ["black", "from-neutral-400 from-0% via-neutral-300 via-50% to-neutral-50 to-100%"],
     ["blue", "from-sky-400 from-0% via-sky-300 via-50% to-neutral-50 to-100%"],
     ["brown", "from-yellow-600 from-0% via-yellow-500 via-50% to-neutral-50 to-100%"],
     ["gray", "from-gray-400 from-0% via-gray-300 via-50% to-neutral-50 to-100%"],
