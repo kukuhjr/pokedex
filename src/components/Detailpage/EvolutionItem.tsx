@@ -9,8 +9,7 @@ import { POKEMON_NATURE_IMAGE } from "../../constants/colors"
 type EvolutionItem = {
     id: string,
     name: string,
-    minLevel: number,
-    isFirst: boolean
+    minLevel: string
 }
 
 const TypesEvoItem = ({ type } :{type: string }) => {

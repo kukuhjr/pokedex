@@ -26,16 +26,22 @@ const TabEvolutionsContent = () => {
     return (
         <div className="px-4 md:px-0">
             {   loadingEvolutionsData ? 
-                    <p>....</p> :
+                    <ErrorFetchingText
+                        className={"py-0 px-0"}
+                        text="Fetching Evo..."
+                    /> :
                 evolutionsData ?
-                    <div className="flex flex-col gap-y-5">
+                    evolutionsData.chain.evolves_to.length > 0 ?
                         <EvolutionRow
                             data={evolutionsData.chain}
-                            id_pokemon={evolutionsData.id}
-                            isFirst={true}
-                        />
-                    </div>
-                :
+                            id_pokemon={getIdOnUrl(evolutionsData.chain?.species?.url ?? "") ?? "???"}
+                            isLeveling={false}
+                        /> :
+                    // NO EVOLVE
+                        <ErrorFetchingText
+                            className="px-0 py-0"
+                            text="This pokemon is does not evolve."
+                        /> : 
                 // ELSE
                     <ErrorFetchingText
                         className={"py-0"}

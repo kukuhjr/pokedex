@@ -1,14 +1,14 @@
 export const COLOR_TEMPLATE = new Map([
-    ["red", "bg-red-800"],
-    ["black", "bg-neutral-800"],
+    ["red", "bg-red-800/[0.85]"],
+    ["black", "bg-neutral-900/[0.95]"],
     ["blue", "bg-sky-700"],
-    ["brown", "bg-yellow-800"],
-    ["gray", "bg-gray-600"],
-    ["green", "bg-emerald-800"],
-    ["pink", "bg-pink-600"],
-    ["purple", "bg-fuchsia-700"],
-    ["white", "bg-slate-400"],
-    ["yellow", "bg-yellow-500"],
+    ["brown", "bg-yellow-900/[0.7]"],
+    ["gray", "bg-gray-900/[0.7]"],
+    ["green", "bg-emerald-800/[0.8]"],
+    ["pink", "bg-pink-600/[0.75]"],
+    ["purple", "bg-fuchsia-700/[0.7]"],
+    ["white", "bg-slate-400/[0.7]"],
+    ["yellow", "bg-yellow-500/[0.85]"],
 ]);
 
 export const GRADIENT_COLOR_TEMPLATE = new Map<string, string>([

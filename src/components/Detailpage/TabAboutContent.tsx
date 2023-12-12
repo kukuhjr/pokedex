@@ -38,7 +38,7 @@ const TabAboutContent = () => {
             <div className="about-box-custom">
                 <div className="w-full text-center p-2">
                     <p className="text-sm text-neutral-900 font-semibold leading-5">
-                        { loadingPokemonData ? '...' : `${pokemonData.weight / 10} kg` }
+                        { loadingPokemonData ? '...' : `${pokemonData?.weight / 10} kg` }
                     </p>
 
                     <span className="text-xs text-neutral-700 leading-3">
@@ -52,7 +52,7 @@ const TabAboutContent = () => {
 
                 <div className="w-full text-center p-2">
                     <p className="text-sm text-neutral-900 font-semibold leading-5">
-                        { loadingPokemonData ? '...' : `${pokemonData.height / 10} m` }
+                        { loadingPokemonData ? '...' : `${pokemonData?.height / 10} m` }
                     </p>
 
                     <span className="text-xs text-neutral-700 leading-3">

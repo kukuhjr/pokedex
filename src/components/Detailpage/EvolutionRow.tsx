@@ -1,36 +1,28 @@
+import { Fragment } from "react"
+
+import { EvolutionPokemonType } from "../../types"
 import { cn, getIdOnUrl } from "../../constants/utils"
-import { OptionProps } from "../../types"
+
 import Divider from "../Divider"
 import EvolutionItem from "./EvolutionItem"
 
-type EvolvesToProps = {
-    evolution_details: Array<any>,
-    evolves_to: Array<EvolvesToProps>,
-    is_baby: boolean,
-    species: OptionProps
-}
-
 type EvolutionRowProps = {
-    data: EvolvesToProps,
-    isFirst?: boolean,
+    data: EvolutionPokemonType,
+    isLeveling?: boolean,
     id_pokemon: string,
-    level?: number
+    minLevel?: string
 }
 
-const EvolutionRow = ({ data, isFirst = false, id_pokemon }: EvolutionRowProps) => {
-    const minLevel = data.evolution_details[0]?.min_level ?? "???"
-
+const EvolutionRow = ({ 
+    data,
+    isLeveling = false,
+    id_pokemon,
+    minLevel = "???"
+}: EvolutionRowProps) => {
     return (
-        <>
-            <EvolutionItem
-                id={id_pokemon}
-                name={data.species.name}
-                minLevel={data.evolution_details[0]?.min_level ?? "???"}
-                isFirst={isFirst}
-            />
-
-            {/* LEVEL BORDER */}
-            {   data.evolves_to.length > 0 &&
+        <div className="flex flex-col gap-y-5">
+            {/* BORDER LEVEL */}
+            {   isLeveling &&
                     <div className="flex">
                         <div className="basis-1/2 relative max-w-[180px]">
                             <div className={cn(`h-full absolute left-1/2 min-h-[40px]`, minLevel === null ? `flex relative` : ``)}>
@@ -49,21 +41,28 @@ const EvolutionRow = ({ data, isFirst = false, id_pokemon }: EvolutionRowProps) 
                     </div>
             }
 
-            <div className="flex flex-col gap-y-1">
-                {   data.evolves_to.length > 0 ?
-                        data.evolves_to.map((evolve, idx) => ( 
+            <EvolutionItem
+                id={id_pokemon}
+                name={data.species.name}
+                minLevel={minLevel}
+            />
+
+            {/* NEW ROW */}
+            {   data.evolves_to.length > 0 ?
+                    data.evolves_to.map((evolve, idx) => ( 
+                        <Fragment key={`evolve-${idx + 1}`}>
                             <EvolutionRow
                                 id_pokemon={getIdOnUrl(evolve?.species?.url ?? "") ?? "???"}
-                                key={`evolve-${idx + 1}`}
                                 data={evolve}
-                                level={idx + 1}
+                                minLevel={evolve.evolution_details[0]?.min_level ?? "???"}
+                                isLeveling={idx === 0}
                             />
-                        )) :
-                    // LAST GEN
-                        <></>
-                }
-            </div>
-        </>
+                        </Fragment> 
+                    )) :
+                // LAST GEN
+                    <></>
+            }
+        </div>
     )
 }
 
