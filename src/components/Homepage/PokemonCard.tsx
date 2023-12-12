@@ -30,7 +30,7 @@ const PokemonCard = ({ pokemonId }: PokemonCardProps) => {
     }
 
     return (
-        <div className={`w-full rounded-lg p-4 ${loadingSpeciesData || errorSpeciesData ? 'bg-sky-400' : COLOR_TEMPLATE.get(speciesData.color.name)} text-neutral-50`}>
+        <div className={`w-full rounded-lg p-4 ${loadingSpeciesData || errorSpeciesData ? 'bg-slate-400' : COLOR_TEMPLATE.get(speciesData.color.name)} text-neutral-50`}>
             <div className="flex justify-between">
                 <span className="text-sm capitalize font-medium line-clamp-1">
                     { loadingPokemonData ? "..." : pokemonData.name }

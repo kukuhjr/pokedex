@@ -1,3 +1,5 @@
+import { OptionProps } from "../types"
+
 export const POKEMON_TYPES = [
     {
         "name": "normal",
@@ -235,4 +237,4 @@ export const POKEMON_STATS = [
     }
 ]
 
-export const POKEMON_MOVES = ["mega-punch","thunder-punch","fire-punch","mega-kick","headbutt","body-slam"]
+export const INITIAL_FILTER_VAL: OptionProps = { name: "placeholder", url: "" }

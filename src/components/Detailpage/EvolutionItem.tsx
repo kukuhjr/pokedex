@@ -3,9 +3,7 @@ import pokeball from "../../assets/pokeball.png"
 import { useGetSinglePokemon } from "../../lib/react-query/queriesAndMutations"
 import { TypesPokemonType } from "../../types"
 
-import Divider from "../Divider"
-
-import { cn, printId } from "../../constants/utils"
+import { printId } from "../../constants/utils"
 import { POKEMON_NATURE_IMAGE } from "../../constants/colors"
 
 type EvolutionItem = {
@@ -32,64 +30,41 @@ const TypesEvoItem = ({ type } :{type: string }) => {
     )
 }
 
-const EvolutionItem = ({ id, name, minLevel, isFirst }: EvolutionItem) => {
+const EvolutionItem = ({ id, name }: EvolutionItem) => {
     const { data: pokemonData, isPending: loadingPokemonData } = useGetSinglePokemon(id, false)
 
     return (
-        <>
-            <div className="flex">
-                <div className="basis-1/2 relative max-w-[180px]">
-
-                    {   !isFirst &&
-                            <div className={cn(`h-full absolute left-1/2 min-h-[40px]`, minLevel=== null || minLevel === 0 ? `flex relative` : ``)}>
-                                <Divider />
-                            </div>
-                    }
-
-                    {   (minLevel !== null && minLevel !== 0) &&
-                            <div className="w-full text-right pr-2">
-                                <span className="text-sm font-light text-neutral-400 leading-10">
-                                    Level { minLevel }
-                                </span>
-                            </div>
-                    }
-                </div>
-
-                <div className="basis-1/2" />
+        <div className="flex jutify-center items-start gap-x-5">
+            <div className="flex-1 bg-blue-200/[0.3] rounded-3xl p-3 flex justify-center max-w-[180px]">
+                <img
+                    src={loadingPokemonData ? pokeball : pokemonData.sprites?.other["official-artwork"].front_default}
+                    alt={`evo-${ name }`}
+                    className="h-full aspect-square max-h-[90px]"
+                />
             </div>
 
-            <div className="flex jutify-center items-start gap-x-5">
-                <div className="flex-1 bg-blue-200/[0.3] rounded-3xl p-3 flex justify-center max-w-[180px]">
-                    <img
-                        src={loadingPokemonData ? pokeball : pokemonData.sprites?.other["official-artwork"].front_default}
-                        alt={`evo-${ name }`}
-                        className="h-full aspect-square max-h-[90px]"
-                    />
-                </div>
+            <div className="flex-1 flex flex-col items-start">
+                <span className="text-lg font-medium text-neutral-400 leading-10">
+                    { loadingPokemonData ? "..." : `#${printId(pokemonData.id)}` }
+                </span>
 
-                <div className="flex-1 flex flex-col items-start">
-                    <span className="text-lg font-medium text-neutral-400 leading-10">
-                        { loadingPokemonData ? "..." : `#${printId(pokemonData.id)}` }
-                    </span>
+                <p className="text-xl text-gray-900 font-medium leading-5 capitalize">
+                    { name }
+                </p>
 
-                    <p className="text-xl text-gray-900 font-medium leading-5 capitalize">
-                        { name }
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mt-3">
-                        {   loadingPokemonData ? 
-                                '...' :
-                            pokemonData.types.map((type: TypesPokemonType, idx: number) => (
-                                <TypesEvoItem
-                                    key={`types-${pokemonData.id}-${idx}`}
-                                    type={type.type.name}
-                                />
-                            )) 
-                        }
-                    </div>
+                <div className="flex flex-wrap gap-2 mt-3">
+                    {   loadingPokemonData ? 
+                            '...' :
+                        pokemonData.types.map((type: TypesPokemonType, idx: number) => (
+                            <TypesEvoItem
+                                key={`types-${pokemonData.id}-${idx}`}
+                                type={type.type.name}
+                            />
+                        )) 
+                    }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

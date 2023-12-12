@@ -25,7 +25,7 @@ const Detailpage = () => {
         navigate("/")
     }
 
-    if(loadingPokemonData) {
+    if(loadingPokemonData || loadingSpeciesData) {
         return (
             <div className="w-full flex items-center justify-center h-screen max-h-[800px]">
                 <img
@@ -48,7 +48,7 @@ const Detailpage = () => {
             <div className={`
                     pt-3 px-3 h-[360px]
                     bg-gradient-to-b 
-                    ${GRADIENT_COLOR_TEMPLATE.get(loadingSpeciesData || errorSpeciesData ? "default" : speciesData.color.name)}
+                    ${GRADIENT_COLOR_TEMPLATE.get(!errorSpeciesData ? speciesData?.color?.name ?? "default" : "default")}
                 `}
             >
                 {/* HEADER */}

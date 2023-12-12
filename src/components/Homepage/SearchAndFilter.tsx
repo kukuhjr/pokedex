@@ -4,12 +4,11 @@ import FilterIcon from "../../assets/icons/FilterIcon"
 import CloseIcon from "../../assets/icons/CloseIcon"
 
 import { FilterContext } from "../../lib/hooks/filterContext"
+import { INITIAL_FILTER_VAL } from "../../constants/dummy"
 
 import Button from "../Button"
 import Modal from "../Modal"
 import ListDropdown from "../ListDropdown"
-
-const INITIAL_FILTER_VAL = { name: "placeholder", url: "" }
 
 const SearchAndFilter = () => {
     const filterState = useContext(FilterContext)

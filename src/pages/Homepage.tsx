@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
-import { useQueryClient } from "@tanstack/react-query"
 
 import { FilterContext } from "../lib/hooks/filterContext"
 import { useGetInfinitePokemons, useGetType } from "../lib/react-query/queriesAndMutations"
-import { QUERY_KEYS } from "../lib/react-query/queryKeys"
 import { OptionProps } from "../types"
 import { getIdOnUrl } from "../constants/utils"
+import { INITIAL_FILTER_VAL } from "../constants/dummy"
 
 import PokemonGridList from "../components/Homepage/PokemonGridList"
 import SearchAndFilter from "../components/Homepage/SearchAndFilter"
 import ErrorFetchingText from "../components/ErrorFetchingText"
 import PokeballLoader from "../components/PokeballLoader"
-
-
-const INITIAL_FILTER_VAL = { name: "placeholder", url: "" }
 
 const Homepage = () => {
     const [selected, setSelected] = useState(INITIAL_FILTER_VAL)
@@ -23,9 +19,7 @@ const Homepage = () => {
     const { ref, inView } = useInView()
     const { data: listPokemons, isPending, isError, fetchNextPage, hasNextPage } = useGetInfinitePokemons()
     
-    const { data: listPokemonNature, isPending: isloadingPokemonNature, isError: errorPokemonNature, refetch } = useGetType(getIdOnUrl(selected.url) ?? "", filterView && selected.url !== "")
-
-    const queryClient = useQueryClient()
+    const { data: listPokemonNature, isPending: isloadingPokemonNature, isError: errorPokemonNature, refetch } = useGetType(getIdOnUrl(selected.url) ?? "", filterView === true && selected.url !== "")
 
     const handleClickApplyFilter = (newVal: OptionProps) => {
         if(!filterView) setFilterView(true)
@@ -35,10 +29,6 @@ const Homepage = () => {
     }
 
     const handleClearFilter = () => {
-        queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.GET_INFINITE_POKEMONS]
-        })
-
         setSelected(INITIAL_FILTER_VAL)
         setFilterView(false)
     }
