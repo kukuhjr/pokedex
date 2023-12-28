@@ -1,5 +1,5 @@
 # Pokedex
-All Pokemons wiki app mobile first view. Sera test purpose.
+All Pokemons wiki app mobile first view. Sera x Avows test purpose.
 
 Install dependencies:
 ```
@@ -11,7 +11,7 @@ Run dev mode:
   npm run dev
 ```
 
-## Tech
+### Tech
 Pokedex uses a number of open source projects:
 
 - ReactJS
@@ -20,3 +20,7 @@ Pokedex uses a number of open source projects:
 - Axios
 - React Query
 - Vite
+
+Sketched by Simone Cavallini ([Behance])
+
+[Behance]: <https://www.behance.net/gallery/158115601/Pokedex-App-Case-Study>

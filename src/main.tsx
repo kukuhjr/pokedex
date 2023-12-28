@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { QueryProvider } from './lib/react-query/QueryProvider.tsx'
 import { BrowserRouter } from 'react-router-dom'
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <QueryProvider>
         <App />
 
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryProvider>
     </BrowserRouter>
   </React.StrictMode>,
