@@ -52,7 +52,7 @@ const Detailpage = () => {
                 `}
             >
                 {/* HEADER */}
-                <div className="flex items-center container mx-auto">
+                <div className="flex items-center container px-0">
                     <Button
                         icon={<ChevronLeftIcon height='24' width='24' />}
                         onClick={handleClickBackButton}

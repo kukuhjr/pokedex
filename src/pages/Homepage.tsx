@@ -47,7 +47,7 @@ const Homepage = () => {
                 filterView
             }}
         >
-            <div className="pt-3 px-3 container mx-auto">
+            <div className="pt-3 px-3 container">
                 <h1 className="text-2xl font-medium">
                     Pokedex
                 </h1>

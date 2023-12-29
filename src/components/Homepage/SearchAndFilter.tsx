@@ -4,20 +4,28 @@ import FilterIcon from "../../assets/icons/FilterIcon"
 import CloseIcon from "../../assets/icons/CloseIcon"
 
 import { FilterContext } from "../../lib/hooks/filterContext"
-import { INITIAL_FILTER_VAL } from "../../constants/dummy"
+import { INITIAL_FILTER_VAL, POKEMON_NATURES } from "../../constants/dummy"
 
 import Button from "../Button"
-import Modal from "../Modal"
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
 import ListDropdown from "../ListDropdown"
 
 const SearchAndFilter = () => {
     const filterState = useContext(FilterContext)
 
-    const [isOpen, setIsOpen] = useState(false)
+    // const [isOpen, setIsOpen] = useState(false)
     const [val, setVal] = useState(filterState?.filterValue ?? INITIAL_FILTER_VAL)
 
-    const handleClickOpenModal = () => { setIsOpen(true) }
-    const handleClickCloseModal = () => { setIsOpen(false) }
+    // const handleClickOpenModal = () => { setIsOpen(true) }
+    // const handleClickCloseModal = () => { setIsOpen(false) }
 
     return (
         <div className={`flex gap-x-2 items-center ${filterState?.filterView ? 'justify-between' : 'justify-end'}`}>
@@ -44,14 +52,56 @@ const SearchAndFilter = () => {
             }
 
             <div>
-                <Button
-                    className="rounded-xl border-0 px-3 py-2 sm:px-3.5 sm:py-3.5"
-                    label="Filter"
+                {/* <Button
+                    className="rounded-xl border-0 px-3 py-2.5"
                     icon={<FilterIcon />}
                     onClick={handleClickOpenModal}
-                />
+                /> */}
 
-                <Modal
+                <Drawer>
+                    <DrawerTrigger>
+                        <Button
+                            className="rounded-xl border-0 px-3 py-2.5"
+                            icon={<FilterIcon />}
+                        />
+                    </DrawerTrigger>
+
+                    <DrawerContent className="min-h-[33vh]">
+                        <DrawerHeader className="text-left">
+                            <DrawerTitle className="text-xl font-medium">
+                                Filters
+                            </DrawerTitle>
+                        </DrawerHeader>
+
+                        <div className="px-4">
+                            <div className="flex flex-col gap-y-3">
+                                <div>
+                                    <p className="text-sm font-medium leading-6 text-gray-900">
+                                        Types
+                                    </p>
+
+                                    <ListDropdown
+                                        customIcon
+                                        placeholder="Select Types"
+                                        selected={val}
+                                        setSelected={setVal}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <DrawerFooter>
+                            <DrawerClose>
+                                <Button
+                                    className="rounded-xl border-0 py-3 w-full bg-yellow-400 hover:bg-yellow-300 uppercase font-semibold"
+                                    label="Apply"
+                                />
+                            </DrawerClose>
+                        </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
+
+                {/* <Modal
                     title={"Filter"}
                     isOpen={isOpen}
                     closeModal={handleClickCloseModal}
@@ -71,13 +121,13 @@ const SearchAndFilter = () => {
                                     />
                                 </div>
 
-                                {/* <div>
+                                <div>
                                     <p className="text-sm font-medium leading-6 text-gray-900">
                                         Natures
                                     </p>
 
                                     <ListDropdown options={POKEMON_NATURES} placeholder="Select Natures" />
-                                </div> */}
+                                </div>
                             </div>
 
                             <div className="mt-6">
@@ -94,7 +144,7 @@ const SearchAndFilter = () => {
                             </div>
                         </div>
                     }
-                />
+                /> */}
             </div>
         </div>
     )
